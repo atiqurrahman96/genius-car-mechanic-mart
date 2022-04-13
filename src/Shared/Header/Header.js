@@ -3,7 +3,14 @@ import React from 'react';
 import { Container, Form, FormControl, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import logo from '../../images/logo.png'
 import { Link } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../firbase.init';
+import { signOut } from 'firebase/auth';
 const Header = () => {
+  const [user] = useAuthState(auth);
+  const handleSignOut = () => {
+    signOut(auth);
+  }
   return (
     <>
 
@@ -27,9 +34,10 @@ const Header = () => {
             </Nav>
             <Nav>
               <Nav.Link as={Link} to="/about">About</Nav.Link>
-              <Nav.Link eventKey={2} as={Link} to="/logIn">
-                Log in
-              </Nav.Link>
+              {user ? <button className='btn btn-link text-white text-decoration-none' onClick={handleSignOut}>sign Out</button> :
+                <Nav.Link eventKey={2} as={Link} to="/logIn">
+                  Log in
+                </Nav.Link>}
             </Nav>
           </Navbar.Collapse>
         </Container>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 
 const ServiceDetail = () => {
@@ -9,6 +9,11 @@ const ServiceDetail = () => {
         <div>
             <h2>
                 Welcome to the service detail:{serviceId}
+                <div className='text-center'>
+                    <Link to="/checkout">
+                        <button className='btn btn-primary'>Proced checkout</button>
+                    </Link>
+                </div>
             </h2>
         </div>
     );
